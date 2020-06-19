@@ -7,11 +7,14 @@ const morgan = require('morgan');
 // Load enviromnent variables
 dotenv.config({ path: './config/config.env' })
 
+// Load router into the server
+const transactions = require('./routes/transactions');
+
 // Initialize express app
 const app = express();
 
-// Route
-app.get('/', (req, res) => res.send('Hello'))
+// Router to be used
+app.use('/api/v1/transactions', transactions);
 
 // Server Environment
 const ENVIRONMENT = process.env.NODE_ENV; 
