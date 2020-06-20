@@ -1,11 +1,15 @@
-// Dependencies
+// Server dependencies
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
 const morgan = require('morgan');
+const connectDB = require('./config/db')
 
 // Load enviromnent variables
 dotenv.config({ path: './config/config.env' })
+
+// Connect to database
+connectDB();
 
 // Load router into the server
 const transactions = require('./routes/transactions');
