@@ -17,6 +17,9 @@ const transactions = require('./routes/transactions');
 // Initialize express app
 const app = express();
 
+// Body parser middleware to use on CRUD operations
+app.use(express.json());
+
 // Router to be used
 app.use('/api/v1/transactions', transactions);
 
