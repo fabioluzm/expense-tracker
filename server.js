@@ -20,6 +20,11 @@ const app = express();
 // Body parser middleware to use on CRUD operations
 app.use(express.json());
 
+// Implement Morgan to show API requests on the server console
+if(process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
 // Router to be used
 app.use('/api/v1/transactions', transactions);
 

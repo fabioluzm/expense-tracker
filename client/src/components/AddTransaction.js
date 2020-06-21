@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { GlobalContext } from '../context/GlobalState';
 
 export const AddTransaction = () => {
@@ -18,10 +17,8 @@ export const AddTransaction = () => {
     e.preventDefault();
 
     const newTransaction = {
-      // id: Math.floor(Math.random()*100000000),
-      id: uuidv4(),
       text: text,
-      amount: parseInt(amount)
+      amount: parseFloat(amount)
     }
 
     addTransaction(newTransaction);
@@ -39,9 +36,9 @@ export const AddTransaction = () => {
         <div className="form-control">
           <label htmlFor="amount">
             Amount <br />
-            (negative - expense, positive - income)
+            Income(positive), Expense(negative)
           </label>
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
+          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} step="0.01" placeholder="Enter amount..." />
         </div>
 
         <button className="btn">Add transaction</button>
