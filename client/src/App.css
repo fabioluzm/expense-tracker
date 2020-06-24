@@ -40,6 +40,16 @@ h4 {
   text-transform: uppercase;
 }
 
+.auth-container {
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
 .balance-container {
   background-color: #fff;
   box-shadow: var(--box-shadow);
@@ -93,6 +103,8 @@ label {
 }
 
 input[type='text'],
+input[type='email'],
+input[type='password'],
 input[type='number'] {
   border: 1px solid #dedede;
   border-radius: 2px;

@@ -1,23 +1,39 @@
 import React from 'react';
 import './App.css';
-import { Header } from './components/Header';
-import { Balance } from './components/Balance';
-import { IncomeExpenses } from './components/IncomeExpenses';
-import { TransactionList } from './components/TransactionList';
-import { AddTransaction } from './components/AddTransaction';
 import { GlobalProvider } from './context/GlobalState';
+import { Login } from './components/auth/Login';
+import { Resgistration } from './components/auth/Registration';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import  Dashboard from './Dashboard';
 
 function App() {
   return (
-    <GlobalProvider>
-      <Header />
-      <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddTransaction />
-      </div>
-    </GlobalProvider>
+    <Router>
+      <GlobalProvider>      
+        {/* <Link to="/">
+          <Login />
+        </Link>
+        <Link to="/signup">
+          <Resgistration />
+        </Link>
+        <Link to="/dashboard">
+          <Dashboard />
+        </Link> */}
+
+        <Switch>
+          <Route path="/signup">
+            <Resgistration />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+
+      </GlobalProvider>
+  </Router>
   );
 }
 
