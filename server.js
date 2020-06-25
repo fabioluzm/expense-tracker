@@ -14,6 +14,7 @@ connectDB();
 
 // Load router into the server
 const transactions = require('./routes/transactions');
+const users = require('./routes/users');
 
 // Initialize express app
 const app = express();
@@ -28,6 +29,7 @@ if(process.env.NODE_ENV === 'development') {
 
 // Router to be used
 app.use('/api/v1/transactions', transactions);
+app.use('/api/v1/users', users);
 
 // Check for production builded files
 if(process.env.NODE_ENV === 'production') {
