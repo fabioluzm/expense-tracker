@@ -94,7 +94,7 @@ exports.updateUser = async (req, res, next) => {
     }
 
     const { username, email, password } = req.body;
-    await user.updateOne(req.body);
+    await user.update(req.body);
     
     return res.status(200).json({
       sucess: true,
