@@ -1,5 +1,6 @@
 // Import User model
 const User = require('../models/User');
+const { generateHash } = require('../config/auth');
 
 // @desc    Get all users
 // @route   GET /api/v1/users
@@ -52,8 +53,10 @@ exports.getUserById = async (req, res, next) => {
 // @access  Public
 exports.addUser = async (req, res, next) => {  
   try {
-    const { username, email, password } = req.body;
-    const user = await User.create(req.body);
+    const { username, email } = req.body;
+    const password = generateHash(req.body.password);
+    
+    const user = await User.create({username, email, password});
 
     return res.status(201).json({
       sucess: true,
@@ -82,7 +85,7 @@ exports.addUser = async (req, res, next) => {
 // @access  Public
 exports.updateUser = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id);
+    let user = await User.findById(req.params.id);
 
     if (!user || user == null) {
       return res.status(404).json({
@@ -90,16 +93,20 @@ exports.updateUser = async (req, res, next) => {
         error: 'User not found.'
       });
     } else {
-      const { username, email, password } = req.body;
+      const { username, email, password} = req.body;
       
-      await user.updateOne(req.body);
-      const updatedUser = await User.findById(req.params.id);
-      
-      console.log(`Updated User: ${user}`);
-      
+      const updatedUser = {
+        username: username ? username: user.username,
+        email: email ? email : user.email,
+        password: password ? generateHash(password) : user.password
+      }
+
+      await user.updateOne(updatedUser);
+      user = await User.findById(req.params.id);
+            
       return res.status(200).json({
         sucess: true,
-        data: updatedUser,
+        data: user,
         message: 'User updated'
       });
     }
