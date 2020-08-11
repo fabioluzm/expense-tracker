@@ -10,10 +10,10 @@ const TransactionSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Please add a value for the current transaction.']
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  // createdAt: {
+  //   type: Date,
+  //   default: Date.now
+  // }
+},{timestamps: true});
 
 module.exports = mongoose.model('Transaction', TransactionSchema);

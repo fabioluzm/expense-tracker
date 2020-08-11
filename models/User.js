@@ -15,10 +15,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add the password.']
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  // createdAt: {
+  //   type: Date,
+  //   default: Date.now
+  // }
+},{timestamps: true});
 
 module.exports = mongoose.model('User', UserSchema);
